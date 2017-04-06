@@ -18,11 +18,11 @@
         <div ng-controller="WithColumnFilterCtrl as showCase">
             <table datatable="" dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns" class="row-border hover">
                 <tfoot>
-                <tr>
-                    <th>ID
-                    </th><th>First Name
-                    </th><th>Last Name
-                </th></tr>
+                    <tr>
+                        <th>ID da Tuma </th>
+                        <th>Turma</th>
+                        <th>Ano</th>
+                    </tr>
                 </tfoot>
             </table>
         </div>
@@ -33,9 +33,11 @@
             .controller('WithColumnFilterCtrl', WithColumnFilterCtrl);
 
             function WithColumnFilterCtrl(DTOptionsBuilder, DTColumnBuilder) {
+                
                 var vm = this;
 
-                vm.dtOptions = DTOptionsBuilder.fromSource('http://l-lin.github.io/angular-datatables/archives/data.json')
+                vm.dtOptions = DTOptionsBuilder.fromSource('data/getData.json')
+                    .withDataProp('data')
                     .withPaginationType('full_numbers')
                     .withColumnFilter({
                         aoColumns: [{
@@ -47,13 +49,13 @@
                         }, {
                             type: 'select',
                             bRegex: false,
-                            values: ['Yoda', 'Titi', 'Kyle', 'Bar', 'Whateveryournameis']
+                            values: ['2017', '2018', '2019', '2020', '2021']
                         }]
                     });
                 vm.dtColumns = [
-                    DTColumnBuilder.newColumn('id').withTitle('ID'),
-                    DTColumnBuilder.newColumn('firstName').withTitle('First name'),
-                    DTColumnBuilder.newColumn('lastName').withTitle('Last name')
+                    DTColumnBuilder.newColumn('id_turma').withTitle('ID da Tuma'),
+                    DTColumnBuilder.newColumn('turma').withTitle('Turma'),
+                    DTColumnBuilder.newColumn('ano').withTitle('Ano')
                 ];
             }
         </script>
